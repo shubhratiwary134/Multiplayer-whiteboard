@@ -10,7 +10,8 @@ interface CursorDisplaysProps {
 // Functional component with props typed
 const CursorDisplays: React.FC<CursorDisplaysProps> = ({ color, x, y }) => {
   return (
-    <svg
+    <div className='cursor-display'>
+          <svg
       style={{
         position: "absolute",
         left: 0,
@@ -29,6 +30,8 @@ const CursorDisplays: React.FC<CursorDisplaysProps> = ({ color, x, y }) => {
         fill={color}
       />
     </svg>
+    </div>
+
   );
 };
 

@@ -116,7 +116,6 @@ body {
 .cursor-display{
   display: flex;
   z-index: 100;
-  
 }
 
 .toolbar button:hover,
