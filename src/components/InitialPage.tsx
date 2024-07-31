@@ -10,7 +10,7 @@ interface State {
   };
   setRoomID: (roomID: string) => void;
   addRoomID: (roomID: string) => void;
-  checkRoomID: (roomID: string | null) => boolean;
+  checkRoomID: (roomID: string|null) => boolean;
   fetchRoomIDs: () => void;
 }
 
@@ -23,7 +23,7 @@ export default function InitialPage() {
   const addRoomID = useStore((state: State) => state.addRoomID);
   const checkRoomID = useStore((state: State) => state.checkRoomID);
   const fetchRoomIDs = useStore((state: State) => state.fetchRoomIDs);
-
+  
   const navigate = useNavigate();
 
   useEffect(() => {

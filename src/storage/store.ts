@@ -420,7 +420,7 @@ interface State {
   setSelection: () => void;
   setRoomID: (roomID: string) => void;
   addRoomID: (roomID: string) => Promise<void>;
-  checkRoomID: (roomID: string) => boolean;
+  checkRoomID: (roomID: string|null) => boolean;
   startDrawing: (e: React.MouseEvent) => void;
   setTypeRect: () => void;
   setTypeLine: () => void;
@@ -532,7 +532,8 @@ const useStore = create<State>()(
         await addDoc(collection(db, 'RoomIDs'), { roomID });
         set({ roomIDs: newRoomIDs });
       },
-      checkRoomID: (roomID) => {
+      checkRoomID: (roomID: string | null) => {
+        if (!roomID) return false;
         const { roomIDs } = get();
         return roomIDs.includes(roomID);
       },
