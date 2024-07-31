@@ -410,7 +410,7 @@ interface State {
   commentDragging: boolean;
   fetchRoomIDs: () => Promise<void>;
   DissolveMovementPointerDown: () => void;
-  DissolveMovementPointerMove: (threadId: string, e: React.MouseEvent) => void;
+  DissolveMovementPointerMove: (threadId: string, e: PointerEvent) => void;
   DissolveMovementPointerUp: () => void;
   setCommentValue: (threadId: string, commentValue: string) => void;
   getRandomInt: (max: number) => number;
