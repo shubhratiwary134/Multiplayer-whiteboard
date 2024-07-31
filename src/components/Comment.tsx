@@ -40,7 +40,7 @@ export default function Comment({ threadId, x, y }: CommentProps) {
     setDissolve(!dissolve);
   }
 
-  function handlePointerDown(e: ReactPointerEvent<HTMLDivElement>) {
+  function handlePointerDown() {
     DissolveMovementPointerDown();
     window.addEventListener('pointermove', handlePointerMove);
     window.addEventListener('pointerup', handlePointerUp);

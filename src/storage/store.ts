@@ -727,11 +727,10 @@ const useStore = create<State>()(
     {
       client,
       presenceMapping: {
-        cursor: true,
+        shapeSelected:true,cursor:true,commentDragging:true
       },
       storageMapping: {
-        shapes: true,
-        threads: true,
+        shapes:true,roomIDs:true,path:true,threads:true,commentValues:true
       },
     
     }
