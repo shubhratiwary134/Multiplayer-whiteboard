@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import useStore from '../storage/store';
 import { useEffect } from "react";
-import Board from "./Board";
+import Board from './Board';
 import LoadingPage from "./LoadingPage";
 
 // Define the expected shape of the URL parameters
