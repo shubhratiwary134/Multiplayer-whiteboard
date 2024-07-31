@@ -1,7 +1,6 @@
 import { useState, useEffect, ChangeEvent, PointerEvent as ReactPointerEvent } from 'react';
 import useStore from '../storage/store';
 
-// Define the interface for the props
 interface CommentProps {
   threadId: string;
   x: number;
