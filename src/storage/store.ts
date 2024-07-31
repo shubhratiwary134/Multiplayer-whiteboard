@@ -435,6 +435,8 @@ interface State {
   forPointerUp: () => void;
   forPointerMove: (e: React.MouseEvent) => void;
   deleteRect: () => void;
+  path?: any[]; 
+  liveblocks: any;
 }
 
 const useStore = create<State>()(
@@ -538,7 +540,12 @@ const useStore = create<State>()(
         set({ drawing: true });
         const { type, shapes } = get();
         const shapeId = Date.now().toString();
-        let shape: Shape;
+        let shape: Shape = {
+            shapeId,
+            x: 0,
+            y: 0,
+            type: 'rectangle', // This value will be overridden in the if-else block
+          };
         if (type === 'rectangle') {
           shape = {
             shapeId,
@@ -595,6 +602,7 @@ const useStore = create<State>()(
       },
       continueDrawing: (e) => {
         const { shapes, shapeSelected, drawing } = get();
+        if (!drawing || shapeSelected === null) return; 
         const shape = shapes[shapeSelected];
         if (!drawing) {
           return;
@@ -724,7 +732,7 @@ const useStore = create<State>()(
         shapes: true,
         threads: true,
       },
-      middleware: [],
+    
     }
   )
 );
