@@ -1,21 +1,21 @@
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
-import useAuthStore from 'src/storage/authStore';
+import { Navigate, useLocation } from 'react-router-dom';
+import useAuthStore from '../storage/authStore';
 
 interface ProtectedRouteProps {
-  element: React.ComponentType;
-  path: string;
+  element: React.ReactElement;
+ 
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element: Component, ...rest }) => {
+const ProtectedRoutes: React.FC<ProtectedRouteProps> = ({ element }) => {
   const { isAuthenticated } = useAuthStore();
+  const location = useLocation();
 
-  return (
-    <Route
-      {...rest}
-      element={isAuthenticated ? <Component /> : <Navigate to="/" />}
-    />
-  );
+  if (!isAuthenticated) {
+    return <Navigate to="/" state={{ from: location }} />;
+  }
+
+  return element;
 };
 
-export default ProtectedRoute;
+export default ProtectedRoutes;
