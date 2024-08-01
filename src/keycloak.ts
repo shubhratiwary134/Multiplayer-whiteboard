@@ -7,12 +7,6 @@ const keycloak = new Keycloak({
   realm:'WhiteBoard',
   clientId:'WhiteBoard',
 });
-keycloak.init({ onLoad: 'login-required' })
-  .then((authenticated) => {
-    console.log('Keycloak initialized:', authenticated);
-  })
-  .catch((error) => {
-    console.error('Keycloak initialization failed:', error);
-  });
+
 
 export default keycloak;

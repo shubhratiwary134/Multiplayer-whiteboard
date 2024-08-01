@@ -4,15 +4,15 @@ import useAuthStore from '../storage/authStore';
 
 interface ProtectedRouteProps {
   element: React.ReactElement;
- 
 }
 
 const ProtectedRoutes: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, keycloak } = useAuthStore();
   const location = useLocation();
 
   if (!isAuthenticated) {
-    return <Navigate to="/" state={{ from: location }} />;
+    keycloak?.login();
+    return <div>Redirecting to login...</div>;
   }
 
   return element;

@@ -1,22 +1,26 @@
-import { create } from "zustand";
-import keycloak from "../keycloak"; 
+import create from 'zustand';
+import keycloak from '../keycloak'; 
 
 interface AuthState {
-  keycloak: Keycloak.KeycloakInstance;
+  keycloak: Keycloak.KeycloakInstance | null;
   isAuthenticated: boolean;
-  initKeycloak: () => void;
+  initKeycloak: () => Promise<void>;
   login: () => void;
   logout: () => void;
   error: string | null; 
 }
 
 const useAuthStore = create<AuthState>((set) => ({
-  keycloak,
+  keycloak: null,
   isAuthenticated: false,
   error: null,
-  initKeycloak: () => {
-    
-    set({ isAuthenticated: keycloak.authenticated });
+  initKeycloak: async () => {
+    try {
+      const authenticated = await keycloak.init({ onLoad: 'login-required' });
+      set({ keycloak, isAuthenticated: authenticated });
+    } catch (error) {
+      set({ error: error.message });
+    }
   },
   login: () => {
     keycloak.login();
