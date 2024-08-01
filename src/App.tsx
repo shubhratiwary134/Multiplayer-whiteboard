@@ -28,7 +28,10 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Suspense fallback={<LoadingScreen />}>
         <Routes>
-          <Route path="/" element={<InitialPage />} />
+        <Route
+            path="/"
+            element={<ProtectedRoutes element={<InitialPage />} />}
+          />
           <Route
             path="/room/:roomID"
             element={<ProtectedRoutes element={<Room />} />}
