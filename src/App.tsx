@@ -3,7 +3,8 @@ import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import InitialPage from './components/InitialPage'
 import Room from './components/Room.js'
-import LoadingPage from './components/LoadingPage.js'
+
+import ProtectedRoute from './components/ProtectedRoutes'
 
 
 
@@ -34,12 +35,9 @@ return(
   <>
 
  <BrowserRouter>
- <Routes>
-  
+ <Routes> 
   <Route path='/' element={<InitialPage></InitialPage>}></Route>
-  <Route path='/room/:roomID' element={<Room></Room>}></Route>
- 
-  
+  <ProtectedRoute path='/room/:roomID' element={Room}></ProtectedRoute>
  </Routes>
  </BrowserRouter>
   </>
