@@ -3,6 +3,7 @@ import Comment from './Comment';
 import CursorDisplays from './CursorDisplays';
 import { useEffect, useRef } from 'react';
 import rough from 'roughjs/bundled/rough.cjs.js';
+import '../App.css'
 
 type Shape = {
   type: 'rectangle' | 'line' | 'pen';
