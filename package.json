@@ -18,6 +18,8 @@
     "@liveblocks/zustand": "^1.12.0",
     "dotenv": "^16.4.5",
     "firebase": "^10.12.4",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "keycloak-js": "^25.0.2",
     "lodash.throttle": "^4.1.1",
     "react": "^18.2.0",

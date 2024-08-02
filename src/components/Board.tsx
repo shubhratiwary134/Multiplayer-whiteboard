@@ -4,6 +4,8 @@ import CursorDisplays from './CursorDisplays';
 import { useEffect, useRef } from 'react';
 import rough from 'roughjs/bundled/rough.cjs.js';
 import '../App.css'
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 type Shape = {
   type: 'rectangle' | 'line' | 'pen';
@@ -97,7 +99,33 @@ export default function Board() {
       }
     }
   }
-
+  
+  const handleExportImage = () => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      html2canvas(canvas).then((canvas) => {
+        const dataURL = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = dataURL;
+        link.download = 'whiteboard.png';
+        link.click();
+      });
+    }
+  };
+  const handleExportPDF = () => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      html2canvas(canvas).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        const imgWidth = 210; 
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        pdf.save('whiteboard.pdf');
+      });
+    }
+  };
+ 
   function addComment() {
     const x = getRandomInt(600);
     const y = getRandomInt(600);
@@ -176,7 +204,10 @@ export default function Board() {
             value={strokeWidth} 
             onChange={(e) => setStrokeWidth(parseInt(e.target.value))} 
           />
+           
         </div>
+        <button onClick={handleExportImage}>Export as Image</button>
+        <button onClick={handleExportPDF}>Export as PDF</button>
           </div>
           {Object.entries(threads).map(([threadId, thread]) => (
         <Comment key={threadId} threadId={threadId} x={thread.x} y={thread.y} />
