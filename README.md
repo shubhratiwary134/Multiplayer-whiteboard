@@ -2,7 +2,7 @@ Multiplayer Whiteboard
 Overview
 
 This project is a multiplayer whiteboard application built using Liveblocks for real-time collaboration and Keycloak for authentication. Users can draw shapes, join existing rooms, create new rooms, and import the canvas as an image or PDF. The frontend is built with React, styled with Tailwind CSS, and uses Zustand for state management. The entire setup is containerized using Docker.
-![UI](MULTIPLAYER/src/images/Screenshot (222).png)
+![Screenshot](./src/images/Screenshot (222).png)
 
 Features
 
