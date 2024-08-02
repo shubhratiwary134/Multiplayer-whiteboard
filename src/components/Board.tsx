@@ -11,6 +11,7 @@ import { IoIosRedo, IoIosUndo } from "react-icons/io";
 import { MdOutlineRectangle } from "react-icons/md";
 import { FaHandPointer, FaPaintbrush, FaSlash } from "react-icons/fa6";
 import { FaCommentAlt } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 type Shape = {
   type: 'rectangle' | 'line' | 'pen';
   x: number;
@@ -69,6 +70,7 @@ export default function Board() {
   const addThreads = useStore((state) => state.addThreads);
   const canvasRef = useRef<HTMLCanvasElement>(null);
  const {setStrokeColor,setStrokeWidth,strokeColor,strokeWidth}=useStore()
+ const navigate =useNavigate()
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -130,6 +132,9 @@ export default function Board() {
     }
   };
  
+  function LeaveRoom(){
+    navigate('/')
+  }
   function addComment() {
     const x = getRandomInt(600);
     const y = getRandomInt(600);
@@ -156,7 +161,7 @@ export default function Board() {
       })}
       <div className='canvas'>
       <div className='roomID text-black ml-10'>
-          <p>Room ID - {roomID}</p>
+      <p>Room ID - {roomID}</p>
         </div>
         <canvas
           ref={canvasRef}
@@ -186,15 +191,17 @@ export default function Board() {
         />
        
       </div>
+     
       <div className='toolbar shadow-2xl shadow-black' >
-            <button onClick={setTypeRect} ><MdOutlineRectangle size={16} /></button>
-            <button onClick={setTypeLine}><FaSlash size={16}/></button>
-            <button onClick={setPen}><FaPaintbrush size={16} /></button>
-            <button onClick={setSelection}><FaHandPointer size={16} /></button>
-            <button onClick={clearRect}><RiDeleteBin5Line size={16}/></button>
-            <button onClick={undo}><IoIosUndo size={16} /></button>
-            <button onClick={redo}><IoIosRedo size={16}/></button>
-            <button onClick={addComment}><FaCommentAlt size={16}/></button>
+        <button onClick={LeaveRoom} className='w-40'>Leave Room</button>
+            <button onClick={setTypeRect} className='toolbar-button' ><MdOutlineRectangle size={24} /></button>
+            <button onClick={setTypeLine} className='toolbar-button'><FaSlash size={24}/></button>
+            <button onClick={setPen} className='toolbar-button'><FaPaintbrush size={24} /></button>
+            <button onClick={setSelection} className='toolbar-button'><FaHandPointer size={24} /></button>
+            <button onClick={clearRect} className='toolbar-button'><RiDeleteBin5Line size={24}/></button>
+            <button onClick={undo} className='toolbar-button'><IoIosUndo size={24} /></button>
+            <button onClick={redo} className='toolbar-button'><IoIosRedo size={24}/></button>
+            <button onClick={addComment}  className='toolbar-button'><FaCommentAlt size={24}/></button>
             <div className='flex items-center gap-2'>
           <input 
             type="color" 
@@ -212,12 +219,13 @@ export default function Board() {
           />
            
         </div>
-       <button onClick={handleExportImage} >Export as Image</button>
-       <button onClick={handleExportPDF}>Export as PDF</button>
+       <button onClick={handleExportImage}  className='w-40'>Export as Image</button>
+       <button onClick={handleExportPDF}  className='w-40'>Export as PDF</button>
           </div>
           {Object.entries(threads).map(([threadId, thread]) => (
         <Comment key={threadId} threadId={threadId} x={thread.x} y={thread.y} />
     ))}
+    
     </div>
   );
 }

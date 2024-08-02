@@ -44,7 +44,7 @@ body {
  
   position: absolute;
 
-  bottom: 20px;
+  bottom: 40px;
 
   left: 50%;
 
@@ -82,7 +82,7 @@ body {
 }
 
 
-.toolbar button {
+.toolbar-button {
 
   display: flex;
 
@@ -90,11 +90,11 @@ body {
 
   justify-content: center;
 
-  padding: 5px 20px;
+  padding: 10px 20px;
 
   border-radius: 4px;
 
-  background-color: #f8f8f8;
+  background-color: #ffffff;
 
   border: none;
 
