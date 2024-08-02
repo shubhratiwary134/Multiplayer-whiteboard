@@ -1,5 +1,30 @@
-This project provides a real-time collaborative whiteboard experience where users can draw, write, and add comments together. It leverages Liveblocks for seamless synchronization and interaction.
-features -
-Collaborative Drawing: Users can draw freely on the whiteboard, with changes instantly reflected for all participants.
-Commenting System: Annotate specific areas of the whiteboard with comments that are visible to all users.
-Live Cursor Indicators: See the cursors of other users in real-time, enhancing the collaborative experience.
+Multiplayer Whiteboard
+Overview
+
+This project is a multiplayer whiteboard application built using Liveblocks for real-time collaboration and Keycloak for authentication. Users can draw shapes, join existing rooms, create new rooms, and import the canvas as an image or PDF. The frontend is built with React, styled with Tailwind CSS, and uses Zustand for state management. The entire setup is containerized using Docker.
+
+
+Features
+
+    Real-time Collaboration: Draw and see updates from other users in real-time.
+    Authentication: Secure login and room access using Keycloak.
+    Room Management: Create new rooms or join existing ones.
+    Drawing Tools: Draw shapes like rectangles, circles, lines, and freehand drawing.
+    Export Canvas: Export the canvas as an image (PNG) or PDF.
+    Responsive Design: Styled with Tailwind CSS for a responsive and visually appealing UI.
+    State Management: Zustand for managing application state.
+
+Technologies Used
+
+    Frontend: React, Tailwind CSS, Zustand
+    Real-time Collaboration: Liveblocks
+    Authentication: Keycloak
+    Containerization: Docker
+
+Prerequisites
+
+    Docker
+    Node.js
+    Keycloak server setup
+
+    
