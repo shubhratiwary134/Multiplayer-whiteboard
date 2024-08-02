@@ -44,35 +44,55 @@ type User = {
 };
 
 export default function Board() {
-  const shapes = useStore((state) => state.shapes);
-  const forPointerUp = useStore((state) => state.forPointerUp);
-  const forPointerMove = useStore((state) => state.forPointerMove);
-  const clearRect = useStore((state) => state.clearRect);
-  
-  const others = useStore((state) => state.liveblocks.others as User[]);
-  const shapeSelected = useStore((state) => state.shapeSelected);
-  const undo = useStore((state) => state.liveblocks.room?.history.undo);
-  const redo = useStore((state) => state.liveblocks.room?.history.redo);
-  const cursorMovement = useStore((state) => state.cursorMovement);
-  const cursorLeave = useStore((state) => state.cursorLeave);
-  const setSelection = useStore((state) => state.setSelection);
-  const continueDrawing = useStore((state) => state.continueDrawing);
-  const stopDrawing = useStore((state) => state.stopDrawing);
-  const setTypeRect = useStore((state) => state.setTypeRect);
-  const setTypeLine = useStore((state) => state.setTypeLine);
-  const selectShape = useStore((state) => state.selectShape);
-  const startDrawing = useStore((state) => state.startDrawing);
-  const selection = useStore((state) => state.selection);
-  const isDragging = useStore((state) => state.isDragging);
-  const setPen = useStore((state) => state.setPen);
-  const roomID = useStore((state) => state.roomID);
-  const drawing = useStore((state) => state.drawing);
-  const getRandomInt = useStore((state) => state.getRandomInt);
-  const threads = useStore((state) => state.threads);
-  const addThreads = useStore((state) => state.addThreads);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  // Shape-related state
+const shapes = useStore((state) => state.shapes);
+const shapeSelected = useStore((state) => state.shapeSelected);
+const selection = useStore((state) => state.selection);
+const selectShape = useStore((state) => state.selectShape);
+const setSelection = useStore((state) => state.setSelection);
+
+// Drawing-related state
+const startDrawing = useStore((state) => state.startDrawing);
+const continueDrawing = useStore((state) => state.continueDrawing);
+const stopDrawing = useStore((state) => state.stopDrawing);
+const drawing = useStore((state) => state.drawing);
+const setTypeRect = useStore((state) => state.setTypeRect);
+const setTypeLine = useStore((state) => state.setTypeLine);
+const clearRect = useStore((state) => state.clearRect);
+
+// Pointer-related state
+const forPointerUp = useStore((state) => state.forPointerUp);
+const forPointerMove = useStore((state) => state.forPointerMove);
+
+// Liveblocks-related state
+const others = useStore((state) => state.liveblocks.others as User[]);
+const undo = useStore((state) => state.liveblocks.room?.history.undo);
+const redo = useStore((state) => state.liveblocks.room?.history.redo);
+const roomID = useStore((state) => state.roomID);
+
+// Cursor-related state
+const cursorMovement = useStore((state) => state.cursorMovement);
+const cursorLeave = useStore((state) => state.cursorLeave);
+
+// Dragging-related state
+const isDragging = useStore((state) => state.isDragging);
+
+// Pen-related state
+const setPen = useStore((state) => state.setPen);
+
+// Utility state
+const getRandomInt = useStore((state) => state.getRandomInt);
+
+// Threads-related state
+const threads = useStore((state) => state.threads);
+const addThreads = useStore((state) => state.addThreads);
+
+
  const {setStrokeColor,setStrokeWidth,strokeColor,strokeWidth}=useStore()
+ const canvasRef = useRef<HTMLCanvasElement>(null);
  const navigate =useNavigate()
+
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
