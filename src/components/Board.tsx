@@ -155,6 +155,9 @@ export default function Board() {
         );
       })}
       <div className='canvas'>
+      <div className='roomID text-black ml-10'>
+          <p>Room ID - {roomID}</p>
+        </div>
         <canvas
           ref={canvasRef}
           width={window.innerWidth - 50}
@@ -181,9 +184,7 @@ export default function Board() {
             }
           }}
         />
-        <div className='roomID text-black ml-10'>
-          <p>Room ID - {roomID}</p>
-        </div>
+       
       </div>
       <div className='toolbar' >
             <button onClick={setTypeRect} ><MdOutlineRectangle size={16} /></button>
@@ -194,9 +195,10 @@ export default function Board() {
             <button onClick={undo}><IoIosUndo size={16} /></button>
             <button onClick={redo}><IoIosRedo size={16}/></button>
             <button onClick={addComment}><FaCommentAlt size={16}/></button>
-            <div>
+            <div className='flex items-center gap-2'>
           <input 
             type="color" 
+            className='w-10 h-10 p-0 border-none cursor-pointer rounded-full' 
             value={strokeColor} 
             onChange={(e) => setStrokeColor(e.target.value)} 
           />
@@ -205,11 +207,12 @@ export default function Board() {
             min="1" 
             max="10" 
             value={strokeWidth} 
+            className='w-24 cursor-pointer' 
             onChange={(e) => setStrokeWidth(parseInt(e.target.value))} 
           />
            
         </div>
-        <button onClick={handleExportImage}>Export as Image</button>
+        <button onClick={handleExportImage} >Export as Image</button>
         <button onClick={handleExportPDF}>Export as PDF</button>
           </div>
           {Object.entries(threads).map(([threadId, thread]) => (
