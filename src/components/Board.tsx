@@ -186,7 +186,7 @@ export default function Board() {
         />
        
       </div>
-      <div className='toolbar' >
+      <div className='toolbar shadow-2xl shadow-black' >
             <button onClick={setTypeRect} ><MdOutlineRectangle size={16} /></button>
             <button onClick={setTypeLine}><FaSlash size={16}/></button>
             <button onClick={setPen}><FaPaintbrush size={16} /></button>
@@ -198,7 +198,7 @@ export default function Board() {
             <div className='flex items-center gap-2'>
           <input 
             type="color" 
-            className='w-10 h-10 p-0 border-none cursor-pointer rounded-full' 
+            className='w-8 h-8 border border-gray-300  cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-full' 
             value={strokeColor} 
             onChange={(e) => setStrokeColor(e.target.value)} 
           />
@@ -212,8 +212,8 @@ export default function Board() {
           />
            
         </div>
-        <button onClick={handleExportImage} >Export as Image</button>
-        <button onClick={handleExportPDF}>Export as PDF</button>
+       <button onClick={handleExportImage} >Export as Image</button>
+       <button onClick={handleExportPDF}>Export as PDF</button>
           </div>
           {Object.entries(threads).map(([threadId, thread]) => (
         <Comment key={threadId} threadId={threadId} x={thread.x} y={thread.y} />
