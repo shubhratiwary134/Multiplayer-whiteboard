@@ -246,7 +246,7 @@ export default function Board() {
       </select>
     </div>
           </div>
-          <div className='w-full roomID text-black  flex justify-between '>
+          <div className=' absolute top-3 w-full roomID text-black  flex justify-between '>
       <p className='m-2'>Room ID - {roomID}</p>
       <button onClick={LeaveRoom} className='m-2 py-2 w-40 bg-red-300'>Leave Room</button>
         </div>
