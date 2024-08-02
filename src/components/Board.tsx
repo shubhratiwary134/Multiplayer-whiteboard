@@ -149,7 +149,7 @@ export default function Board() {
             }
           }}
         />
-        <div className='roomID text-white ml-10'>
+        <div className='roomID text-black ml-10'>
           <p>Room ID - {roomID}</p>
         </div>
       </div>

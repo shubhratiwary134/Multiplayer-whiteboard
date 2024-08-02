@@ -14,7 +14,7 @@ body {
 
 
 .canvas {
-  background-color: #121212;
+  background-color: whitesmoke;
   touch-action: none;
   width: 100vw;
   height: 100vh;
