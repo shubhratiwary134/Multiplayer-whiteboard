@@ -232,7 +232,7 @@ export default function Board() {
           <div className=' absolute top-3 w-full roomID text-black  flex justify-between '>
       <p className='m-2'>Room ID - {roomID}</p>
       <div className="w-48 flex flex-col items-center mx-10">
-      <label htmlFor="export" className="block text-sm font-medium text-gray-700">
+      <label htmlFor="export" className="block text-lg font-medium text-gray-700">
         Export
       </label>
       <select

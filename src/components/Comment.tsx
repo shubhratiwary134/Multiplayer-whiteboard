@@ -82,11 +82,11 @@ export default function Comment({ threadId, x, y }: CommentProps) {
             value={localCommentValue}
             placeholder='Enter Comment'
             disabled={disabled}
-            className='bg-black p-2 rounded-xl text-white mb-4 focus:outline-none'
+            className='bg-white p-2 rounded-xl text-white mb-4 focus:outline-none'
           />
           <button
             onClick={handleSubmit}
-            className=' text-black border-2 border-black text-sm p-3 rounded-lg bg-transparent hover:bg-white hover:text-black hover:scale-110 dark:text-neutral-200 transition duration-500'
+            className=' text-black  border-2 border-black text-sm px-3 py-2 rounded-lg  hover:bg-white hover:text-black hover:scale-110  transition duration-500'
           >
             Add Comment
           </button>
