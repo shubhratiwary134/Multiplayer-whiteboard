@@ -102,7 +102,6 @@ const addThreads = useStore((state) => state.addThreads);
     const roughCanvas = rough.canvas(canvas);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     Object.entries(shapes).forEach(([shapeId, shape]) => {
-     
       printRectangle(shape, ctx, roughCanvas);
     });
   }, [shapes, shapeSelected, drawing, others]);
