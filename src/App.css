@@ -18,6 +18,7 @@ body {
   touch-action: none;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 
@@ -70,8 +71,9 @@ body {
 }
 @media screen and (max-width: 900px) {
   .toolbar{
+    width:100px;
     flex-direction: column;
-    top: 10px;
+    top: 50px;
     left:50px;
   }
   .roomID{

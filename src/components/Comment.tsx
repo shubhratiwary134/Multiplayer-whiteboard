@@ -1,5 +1,6 @@
 import { useState, useEffect, ChangeEvent, PointerEvent as ReactPointerEvent } from 'react';
 import useStore from '../storage/store';
+import { FaRegCommentAlt } from 'react-icons/fa';
 
 interface CommentProps {
   threadId: string;
@@ -72,9 +73,7 @@ export default function Comment({ threadId, x, y }: CommentProps) {
         className='rounded w-10 bg-black-200'
         onClick={handleDissolve}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-          <path d="M880-80 720-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v720ZM160-320h594l46 45v-525H160v480Zm0 0v-480 480Z"/>
-        </svg>
+       <FaRegCommentAlt />
       </button>
       {dissolve && (
         <div className='mt-2 flex flex-col items-center'>
@@ -87,7 +86,7 @@ export default function Comment({ threadId, x, y }: CommentProps) {
           />
           <button
             onClick={handleSubmit}
-            className='text-white border-4 border-black text-sm p-3 rounded-lg bg-transparent hover:bg-white hover:text-black hover:scale-110 dark:text-neutral-200 transition duration-500'
+            className=' text-black border-2 border-black text-sm p-3 rounded-lg bg-transparent hover:bg-white hover:text-black hover:scale-110 dark:text-neutral-200 transition duration-500'
           >
             Add Comment
           </button>

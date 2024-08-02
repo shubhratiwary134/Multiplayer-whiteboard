@@ -200,7 +200,7 @@ export default function Board() {
        
       </div>
      
-      <div className='toolbar shadow-2xl shadow-black rounded-lg' >
+      <div className='w-2/3 flex justify-around toolbar shadow-2xl shadow-black rounded-lg' >
        
             <button onClick={setTypeRect} className='toolbar-button' ><MdOutlineRectangle size={24} /></button>
             <button onClick={setTypeLine} className='toolbar-button'><FaSlash size={24}/></button>
@@ -227,7 +227,11 @@ export default function Board() {
           />
            
         </div>
-        <div className="w-48 flex flex-col items-center mx-10">
+       
+          </div>
+          <div className=' absolute top-3 w-full roomID text-black  flex justify-between '>
+      <p className='m-2'>Room ID - {roomID}</p>
+      <div className="w-48 flex flex-col items-center mx-10">
       <label htmlFor="export" className="block text-sm font-medium text-gray-700">
         Export
       </label>
@@ -245,10 +249,8 @@ export default function Board() {
         <option value="pdf">PDF</option>
       </select>
     </div>
-          </div>
-          <div className=' absolute top-3 w-full roomID text-black  flex justify-between '>
-      <p className='m-2'>Room ID - {roomID}</p>
       <button onClick={LeaveRoom} className='m-2 py-2 w-40 bg-red-300'>Leave Room</button>
+      
         </div>
           {Object.entries(threads).map(([threadId, thread]) => (
         <Comment key={threadId} threadId={threadId} x={thread.x} y={thread.y} />
