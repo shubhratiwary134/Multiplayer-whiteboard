@@ -45,7 +45,7 @@ export default function Board() {
   const forPointerUp = useStore((state) => state.forPointerUp);
   const forPointerMove = useStore((state) => state.forPointerMove);
   const clearRect = useStore((state) => state.clearRect);
-  const deleteRect = useStore((state) => state.deleteRect);
+  
   const others = useStore((state) => state.liveblocks.others as User[]);
   const shapeSelected = useStore((state) => state.shapeSelected);
   const undo = useStore((state) => state.liveblocks.room?.history.undo);
@@ -186,15 +186,14 @@ export default function Board() {
         </div>
       </div>
       <div className='toolbar' >
-            <button onClick={setTypeRect} ><MdOutlineRectangle size={32} /></button>
-            <button onClick={setTypeLine}><FaSlash size={32}/></button>
-            <button onClick={setPen}><FaPaintbrush size={32} /></button>
-            <button onClick={setSelection}><FaHandPointer size={32} /></button>
-            <button onClick={clearRect}><RiDeleteBin5Line size={32}/></button>
-            <button onClick={deleteRect}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg></button>
-            <button onClick={undo}><IoIosUndo size={32} /></button>
-            <button onClick={redo}><IoIosRedo size={32}/></button>
-            <button onClick={addComment}><FaCommentAlt size={32}/></button>
+            <button onClick={setTypeRect} ><MdOutlineRectangle size={16} /></button>
+            <button onClick={setTypeLine}><FaSlash size={16}/></button>
+            <button onClick={setPen}><FaPaintbrush size={16} /></button>
+            <button onClick={setSelection}><FaHandPointer size={16} /></button>
+            <button onClick={clearRect}><RiDeleteBin5Line size={16}/></button>
+            <button onClick={undo}><IoIosUndo size={16} /></button>
+            <button onClick={redo}><IoIosRedo size={16}/></button>
+            <button onClick={addComment}><FaCommentAlt size={16}/></button>
             <div>
           <input 
             type="color" 
