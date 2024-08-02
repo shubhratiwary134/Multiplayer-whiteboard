@@ -13,6 +13,8 @@ type Shape = {
   height?: number;
   x2?: number;
   y2?: number;
+  strokeColor:string,
+  strokeWidth:number,
   path?: { x: number; y: number }[];
 };
 
@@ -60,7 +62,7 @@ export default function Board() {
   const threads = useStore((state) => state.threads);
   const addThreads = useStore((state) => state.addThreads);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
+ const {setStrokeColor,setStrokeWidth,strokeColor,strokeWidth}=useStore()
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -70,27 +72,24 @@ export default function Board() {
     const roughCanvas = rough.canvas(canvas);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     Object.entries(shapes).forEach(([shapeId, shape]) => {
-      let borderColor = 'white';
-      if (shapeSelected === shapeId) {
-        borderColor = '#00FF99';
-      } else if (others.some((user) => user.presence.shapeSelected === shapeId)) {
-        borderColor = 'blue';
-      }
-      printRectangle(shape, borderColor, ctx, roughCanvas);
+     
+      printRectangle(shape, ctx, roughCanvas);
     });
   }, [shapes, shapeSelected, drawing, others]);
 
-  function printRectangle(shape: Shape, borderColor: string, ctx: CanvasRenderingContext2D, roughCanvas: any) {
+  function printRectangle(shape: Shape, ctx: CanvasRenderingContext2D, roughCanvas: any) {  
+    const strokeWidth = shape.strokeWidth || 1;
     if (shape.type === 'rectangle') {
-      roughCanvas.rectangle(shape.x, shape.y, shape.width!, shape.height!, { roughness: 1.5, stroke: borderColor, strokeWidth: 2 });
+      roughCanvas.rectangle(shape.x, shape.y, shape.width!, shape.height!, { roughness: 1, stroke: shape.strokeColor, strokeWidth: strokeWidth });
     } else if (shape.type === 'line') {
       roughCanvas.line(shape.x, shape.y, shape.x2!, shape.y2!, {
-        stroke: 'white',
-        strokeWidth: 2,
+        stroke: shape.strokeColor,
+        strokeWidth: strokeWidth,
       });
     } else if (shape.type === 'pen' && shape.path && Array.isArray(shape.path)) {
       if (shape.path.length > 0) {
-        ctx.strokeStyle = 'white';
+        ctx.strokeStyle = shape.strokeColor;
+        ctx.lineWidth = strokeWidth;
         ctx.beginPath();
         ctx.moveTo(shape.path[0].x, shape.path[0].y);
         shape.path.forEach((point) => ctx.lineTo(point.x, point.y));
@@ -164,6 +163,20 @@ export default function Board() {
             <button onClick={undo}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M280-200v-80h284q63 0 109.5-40T720-420q0-60-46.5-100T564-560H312l104 104-56 56-200-200 200-200 56 56-104 104h252q97 0 166.5 63T800-420q0 94-69.5 157T564-200H280Z"/></svg></button>
             <button onClick={redo}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M396-200q-97 0-166.5-63T160-420q0-94 69.5-157T396-640h252L544-744l56-56 200 200-200 200-56-56 104-104H396q-63 0-109.5 40T240-420q0 60 46.5 100T396-280h284v80H396Z"/></svg></button>
             <button onClick={addComment}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-400h80v-120h120v-80H520v-120h-80v120H320v80h120v120ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg></button>
+            <div>
+          <input 
+            type="color" 
+            value={strokeColor} 
+            onChange={(e) => setStrokeColor(e.target.value)} 
+          />
+          <input 
+            type="range" 
+            min="1" 
+            max="10" 
+            value={strokeWidth} 
+            onChange={(e) => setStrokeWidth(parseInt(e.target.value))} 
+          />
+        </div>
           </div>
           {Object.entries(threads).map(([threadId, thread]) => (
         <Comment key={threadId} threadId={threadId} x={thread.x} y={thread.y} />
