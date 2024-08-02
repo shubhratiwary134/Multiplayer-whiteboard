@@ -10,8 +10,10 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { IoIosRedo, IoIosUndo } from "react-icons/io";
 import { MdOutlineRectangle } from "react-icons/md";
 import { FaHandPointer, FaPaintbrush, FaSlash } from "react-icons/fa6";
-import { FaCommentAlt } from "react-icons/fa";
+import { FaCommentAlt, FaRegCommentAlt, FaRegHandPaper } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import { IoArrowRedoOutline, IoArrowUndoOutline } from "react-icons/io5";
+import { HiOutlinePaintBrush } from "react-icons/hi2";
 type Shape = {
   type: 'rectangle' | 'line' | 'pen';
   x: number;
@@ -141,6 +143,14 @@ export default function Board() {
     const threadId = Date.now().toString();
     addThreads(threadId, '', x, y);
   }
+  const handleExport = (e) => {
+    const value = e.target.value;
+    if (value === 'image') {
+      handleExportImage();
+    } else if (value === 'pdf') {
+      handleExportPDF();
+    }
+  };
 
   return (
     <div onPointerMove={cursorMovement} onPointerLeave={cursorLeave}>
@@ -160,9 +170,7 @@ export default function Board() {
         );
       })}
       <div className='canvas'>
-      <div className='roomID text-black ml-10'>
-      <p>Room ID - {roomID}</p>
-        </div>
+     
         <canvas
           ref={canvasRef}
           width={window.innerWidth - 50}
@@ -193,15 +201,15 @@ export default function Board() {
       </div>
      
       <div className='toolbar shadow-2xl shadow-black rounded-lg' >
-        <button onClick={LeaveRoom} className='w-40 bg-red-600'>Leave Room</button>
+       
             <button onClick={setTypeRect} className='toolbar-button' ><MdOutlineRectangle size={24} /></button>
             <button onClick={setTypeLine} className='toolbar-button'><FaSlash size={24}/></button>
-            <button onClick={setPen} className='toolbar-button'><FaPaintbrush size={24} /></button>
-            <button onClick={setSelection} className='toolbar-button'><FaHandPointer size={24} /></button>
+            <button onClick={setPen} className='toolbar-button'><HiOutlinePaintBrush size={24} /></button>
+            <button onClick={setSelection} className='toolbar-button'><FaRegHandPaper size={24}/></button>
             <button onClick={clearRect} className='toolbar-button'><RiDeleteBin5Line size={24}/></button>
-            <button onClick={undo} className='toolbar-button'><IoIosUndo size={24} /></button>
-            <button onClick={redo} className='toolbar-button'><IoIosRedo size={24}/></button>
-            <button onClick={addComment}  className='toolbar-button'><FaCommentAlt size={24}/></button>
+            <button onClick={undo} className='toolbar-button'><IoArrowUndoOutline size={24} /></button>
+            <button onClick={redo} className='toolbar-button'><IoArrowRedoOutline size={24} /></button>
+            <button onClick={addComment}  className='toolbar-button'><FaRegCommentAlt size={24}/></button>
             <div className='flex items-center gap-2'>
           <input 
             type="color" 
@@ -219,9 +227,29 @@ export default function Board() {
           />
            
         </div>
-       <button onClick={handleExportImage}  className='w-40'>Export as Image</button>
-       <button onClick={handleExportPDF}  className='w-40'>Export as PDF</button>
+        <div className="w-48 flex flex-col items-center mx-10">
+      <label htmlFor="export" className="block text-sm font-medium text-gray-700">
+        Export
+      </label>
+      <select
+        id="export"
+        name="export"
+        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+        onChange={handleExport}
+        defaultValue=""
+      >
+        <option value="" disabled>
+          Select format
+        </option>
+        <option value="image">Image</option>
+        <option value="pdf">PDF</option>
+      </select>
+    </div>
           </div>
+          <div className='w-full roomID text-black  flex justify-between '>
+      <p className='m-2'>Room ID - {roomID}</p>
+      <button onClick={LeaveRoom} className='m-2 py-2 w-40 bg-red-300'>Leave Room</button>
+        </div>
           {Object.entries(threads).map(([threadId, thread]) => (
         <Comment key={threadId} threadId={threadId} x={thread.x} y={thread.y} />
     ))}

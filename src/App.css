@@ -1,5 +1,5 @@
 body {
-  background-color: #121212;
+  background-color: whitesmoke;
   font-size: 1rem;
 }
 
@@ -98,11 +98,7 @@ body {
 
   border: none;
 
-  box-shadow:
-
-    0px 2px 4px rgba(0, 0, 0, 0.1),
-
-    0px 0px 0px 1px rgba(0, 0, 0, 0.05);
+ 
 
   margin: 10px;
 
@@ -119,7 +115,7 @@ body {
 .toolbar-button:hover,
 
 .toolbar-button:focus {
-  transform: translateY(-10px);
+ transform: translateY(-5px);
   background-color: wheat;
   transition: .65s;
 }
