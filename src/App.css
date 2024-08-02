@@ -116,9 +116,9 @@ body {
   z-index: 100;
 }
 
-.toolbar button:hover,
+.toolbar-button:hover,
 
-.toolbar button:focus {
+.toolbar-button:focus {
   transform: translateY(-10px);
   background-color: wheat;
   transition: .65s;

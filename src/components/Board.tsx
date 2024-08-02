@@ -192,8 +192,8 @@ export default function Board() {
        
       </div>
      
-      <div className='toolbar shadow-2xl shadow-black' >
-        <button onClick={LeaveRoom} className='w-40'>Leave Room</button>
+      <div className='toolbar shadow-2xl shadow-black rounded-lg' >
+        <button onClick={LeaveRoom} className='w-40 bg-red-600'>Leave Room</button>
             <button onClick={setTypeRect} className='toolbar-button' ><MdOutlineRectangle size={24} /></button>
             <button onClick={setTypeLine} className='toolbar-button'><FaSlash size={24}/></button>
             <button onClick={setPen} className='toolbar-button'><FaPaintbrush size={24} /></button>
