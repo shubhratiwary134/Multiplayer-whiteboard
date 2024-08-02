@@ -15,6 +15,8 @@ Features
     Responsive Design: Styled with Tailwind CSS for a responsive and visually appealing UI.
     State Management: Zustand for managing application state.
 
+![Screenshot](./src/images/UI2.png)
+
 Technologies Used
 
     Frontend: React, Tailwind CSS, Zustand
