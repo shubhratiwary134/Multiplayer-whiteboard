@@ -38,8 +38,11 @@ Usage
  Clear Canvas:
         Click the clear button to remove all drawings from the canvas.
 
+ Export Canvas:
+         Export the canvas in format of image or pdf ,using the export option in the Top . 
 
 ![Screenshot](./src/images/UI2.png)
+
 
 Technologies Used
 
