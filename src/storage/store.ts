@@ -9,6 +9,7 @@ const client = createClient({
   publicApiKey: import.meta.env.VITE_API_KEY,
 });
 
+//type definitions
 interface Shape {
   shapeId: string;
   x: number;
@@ -86,6 +87,7 @@ interface State {
 const useStore = create<State>()(
   liveblocks(
     (set, get) => ({
+      
       shapes: {},
       threads: {},
       roomID: null,
@@ -93,7 +95,7 @@ const useStore = create<State>()(
       shapeSelected: null,
       isDragging: false,
       drawing: false,
-      type: 'rectangle',
+      type: 'rectangle',// initially set to rectangle 
       cursor: { x: 0, y: 0 },
       selection: false,
       commentValues: {},
@@ -106,7 +108,7 @@ const useStore = create<State>()(
       setStrokeColor: (color: string) => {
         set({ strokeColor: color });
       },
-      // Fetch Room IDs from Firestore
+      // Fetch Room IDs from FireStore
       fetchRoomIDs: async () => {
         const roomIDsCollection = collection(db, 'RoomIDs');
         const RoomIDsSnapShot = await getDocs(roomIDsCollection);
@@ -349,6 +351,7 @@ const useStore = create<State>()(
         set({ shapeSelected, isDragging: Boolean(shapeSelected) });
       },
 
+      // function for Live cursors 
       cursorMovement: (e) => {
         const { drawing, type } = get();
         set({ cursor: { x: e.clientX, y: e.clientY } });
@@ -366,12 +369,15 @@ const useStore = create<State>()(
           shapes: {},
         });
       },
+
+
       selectParticularShape: (shapeId) => {
         set({
           shapeSelected: shapeId,
           selection: false,
         });
       },
+
       forPointerUp: () => {
         set({ isDragging: false });
       },
@@ -392,6 +398,8 @@ const useStore = create<State>()(
           },
         });
       },
+
+      // Delete the particular selected shape , removing it from the shapes object
       deleteRect: () => {
         const { shapes, shapeSelected } = get();
         const newShapes = { ...shapes };
@@ -402,6 +410,8 @@ const useStore = create<State>()(
         });
       },
     }),
+
+    //liveblocks presence mapping and storage mapping 
     {
       client,
       presenceMapping: {
