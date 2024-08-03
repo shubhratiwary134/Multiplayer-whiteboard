@@ -5,15 +5,37 @@ This project is a multiplayer whiteboard application built using Liveblocks for 
 
 ![Screenshot](./src/images/UI.png)
 
-Features
+Usage
 
-    Real-time Collaboration: Draw and see updates from other users in real-time.
-    Authentication: Secure login and room access using Keycloak.
-    Room Management: Create new rooms or join existing ones.
-    Drawing Tools: Draw shapes like rectangles, circles, lines, and freehand drawing.
-    Export Canvas: Export the canvas as an image (PNG) or PDF.
-    Responsive Design: Styled with Tailwind CSS for a responsive and visually appealing UI.
-    State Management: Zustand for managing application state.
+ Create a Room:
+        Open the application and click on "Create Room."
+        Share the room ID with others to join.
+
+ Join a Room:
+        Open the application and enter the room ID in the "Join Room" section.
+        Click "Join Room" to start drawing with others.
+
+ Drawing:
+        Select the desired drawing tool (Brush, Rectangle, Line) from the toolbar.
+        Customize the stroke color and width using the provided options.
+        Draw on the canvas. Your changes will be visible to others in real-time.
+
+ Cursor Visibility:
+        Move your cursor around the canvas to see the cursors of other users.
+
+ Draggable Comments:
+        Add a comment by selecting the comment tool and clicking on the canvas.
+        Drag the comment to reposition it.
+
+  Undo/Redo:
+        Use the undo button to revert the last action.
+        Use the redo button to reapply the last undone action.
+
+ Clear Canvas:
+        Click the clear button to remove all drawings from the canvas.
+
+
+![Screenshot](./src/images/UI2.png)
 
 Technologies Used
 
