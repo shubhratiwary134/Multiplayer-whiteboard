@@ -23,6 +23,10 @@ Usage
  Cursor Visibility:
         Move your cursor around the canvas to see the cursors of other users.
 
+        
+![Screenshot](./src/images/UI3.png)
+        
+
  Draggable Comments:
         Add a comment by selecting the comment tool and clicking on the canvas.
         Drag the comment to reposition it.
