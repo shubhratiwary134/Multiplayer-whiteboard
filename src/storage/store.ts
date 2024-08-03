@@ -106,12 +106,14 @@ const useStore = create<State>()(
       setStrokeColor: (color: string) => {
         set({ strokeColor: color });
       },
+      // Fetch Room IDs from Firestore
       fetchRoomIDs: async () => {
         const roomIDsCollection = collection(db, 'RoomIDs');
         const RoomIDsSnapShot = await getDocs(roomIDsCollection);
         const RoomIDsList = RoomIDsSnapShot.docs.map((doc) => doc.data().roomID);
         set({ roomIDs: RoomIDsList });
       },
+       // Dissolve Movement Handlers
       DissolveMovementPointerDown: () => {
         set({ commentDragging: true });
       },
@@ -142,6 +144,8 @@ const useStore = create<State>()(
       getRandomInt: (max) => {
         return Math.floor(Math.random() * max);
       },
+
+      //threads CRUD operations 
       addThreads: (threadId, text, x, y) => {
         const { threads } = get();
         const thread = {
@@ -172,9 +176,12 @@ const useStore = create<State>()(
           threads: newThreads,
         });
       },
+
       setSelection: () => {
         set({ selection: true });
       },
+
+      // RoomIDs 
       setRoomID: (roomID) => {
         set({ roomID });
       },
@@ -189,6 +196,32 @@ const useStore = create<State>()(
         const { roomIDs } = get();
         return roomIDs.includes(roomID);
       },
+
+      
+      
+
+      //set the type for the shapes 
+      setTypeRect: () => {
+        set({
+          type: 'rectangle',
+          selection: false,
+        });
+      },
+      setTypeLine: () => {
+        set({
+          type: 'line',
+          selection: false,
+        });
+      },
+      setPen: () => {
+        set({
+          type: 'pen',
+          selection: false,
+        });
+      },
+
+      //Drawing handlers
+
       startDrawing: (e) => {
         set({ drawing: true });
         const { type, shapes,strokeColor,strokeWidth } = get();
@@ -240,24 +273,7 @@ const useStore = create<State>()(
         });
         get().liveblocks.room?.history.pause();
       },
-      setTypeRect: () => {
-        set({
-          type: 'rectangle',
-          selection: false,
-        });
-      },
-      setTypeLine: () => {
-        set({
-          type: 'line',
-          selection: false,
-        });
-      },
-      setPen: () => {
-        set({
-          type: 'pen',
-          selection: false,
-        });
-      },
+
       continueDrawing: (e) => {
         const { shapes, shapeSelected, drawing } = get();
         if (!drawing || shapeSelected === null) return; 
@@ -305,6 +321,8 @@ const useStore = create<State>()(
         set({ path: [] });
         get().liveblocks.room?.history.resume();
       },
+
+      // shape selection functions 
       selectShape: (e) => {
         const { shapes } = get();
         const shapeSelected = Object.keys(shapes).find((shapeId) => {
@@ -330,6 +348,7 @@ const useStore = create<State>()(
         });
         set({ shapeSelected, isDragging: Boolean(shapeSelected) });
       },
+
       cursorMovement: (e) => {
         const { drawing, type } = get();
         set({ cursor: { x: e.clientX, y: e.clientY } });
@@ -340,6 +359,8 @@ const useStore = create<State>()(
       cursorLeave: () => {
         set({ cursor: { x: 0, y: 0 } });
       },
+
+      // handles the clearing of the canvas by setting the shapes to null
       clearRect: () => {
         set({
           shapes: {},
