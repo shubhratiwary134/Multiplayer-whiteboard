@@ -3,7 +3,12 @@ Overview
 
 This project is a multiplayer whiteboard application built using Liveblocks for real-time collaboration and Keycloak for authentication. Users can draw shapes, join existing rooms, create new rooms, and import the canvas as an image or PDF. The frontend is built with React, styled with Tailwind CSS, and uses Zustand for state management. The entire setup is containerized using Docker.
 
+
+
 ![Screenshot](./src/images/UI.png)
+
+
+
 
 Usage
 
@@ -23,6 +28,14 @@ Usage
  Cursor Visibility:
         Move your cursor around the canvas to see the cursors of other users.
 
+
+
+        
+![Screenshot](./src/images/UI4.png)
+
+
+        
+
  Draggable Comments:
         Add a comment by selecting the comment tool and clicking on the canvas.
         Drag the comment to reposition it.
@@ -34,8 +47,14 @@ Usage
  Clear Canvas:
         Click the clear button to remove all drawings from the canvas.
 
+ Export Canvas:
+         Export the canvas in format of image or pdf ,using the export option in the Top . 
+
+
 
 ![Screenshot](./src/images/UI2.png)
+
+
 
 Technologies Used
 
@@ -49,5 +68,9 @@ Prerequisites
     Docker
     Node.js
     Keycloak server setup
+
+Contact
+
+For any inquiries or issues, please contact [shubhratiwary5@gmail.com].
 
     
