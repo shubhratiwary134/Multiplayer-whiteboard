@@ -24,7 +24,7 @@ Usage
         Move your cursor around the canvas to see the cursors of other users.
 
         
-![Screenshot](./src/images/UI3.png)
+![Screenshot](./src/images/UI4.png)
         
 
  Draggable Comments:
