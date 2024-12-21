@@ -10,6 +10,7 @@ const ProtectedRoutes = React.lazy(() => import('./components/ProtectedRoutes'))
 const App: React.FC = () => {
   const isRun = useRef(false);
   const { initKeycloak, error } = useAuthStore();
+  
 
   useEffect(() => {
     if (isRun.current) return;
