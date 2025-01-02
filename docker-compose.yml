@@ -1,8 +1,6 @@
 services:
   keycloak:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: quay.io/keycloak/keycloak:latest
     environment:
       - DB_VENDOR=postgres
       - DB_ADDR=postgres
