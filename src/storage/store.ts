@@ -1,9 +1,8 @@
-
-import { create } from 'zustand';
-import { createClient } from '@liveblocks/client';
-import { liveblocks } from '@liveblocks/zustand';
-import { db } from '../Firebase';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { create } from "zustand";
+import { createClient } from "@liveblocks/client";
+import { liveblocks } from "@liveblocks/zustand";
+import { db } from "../Firebase";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 
 const client = createClient({
   publicApiKey: import.meta.env.VITE_API_KEY,
@@ -21,9 +20,8 @@ interface Shape {
   y2?: number;
   strokeColor: string;
   strokeWidth?: number;
-  type: 'rectangle' | 'line' | 'pen';
+  type: "rectangle" | "line" | "pen";
   path?: { x: number; y: number }[];
-
 }
 
 interface Thread {
@@ -44,7 +42,7 @@ interface State {
   shapeSelected: string | null;
   isDragging: boolean;
   drawing: boolean;
-  type: 'rectangle' | 'line' | 'pen';
+  type: "rectangle" | "line" | "pen";
   cursor: { x: number; y: number };
   selection: boolean;
   commentValues: CommentValues;
@@ -65,7 +63,7 @@ interface State {
   setSelection: () => void;
   setRoomID: (roomID: string) => void;
   addRoomID: (roomID: string) => Promise<void>;
-  checkRoomID: (roomID: string|null) => boolean;
+  checkRoomID: (roomID: string | null) => boolean;
   startDrawing: (e: React.MouseEvent) => void;
   setTypeRect: () => void;
   setTypeLine: () => void;
@@ -80,15 +78,13 @@ interface State {
   forPointerUp: () => void;
   forPointerMove: (e: React.MouseEvent) => void;
   deleteRect: () => void;
-  path?: any[]; 
+  path?: any[];
   liveblocks: any;
 }
-
 
 const useStore = create<State>()(
   liveblocks(
     (set, get) => ({
-      
       shapes: {},
       threads: {},
       roomID: null,
@@ -96,13 +92,13 @@ const useStore = create<State>()(
       shapeSelected: null,
       isDragging: false,
       drawing: false,
-      type: 'rectangle',// initially set to rectangle 
+      type: "rectangle", // initially set to rectangle
       cursor: { x: 0, y: 0 },
       selection: false,
       commentValues: {},
       commentDragging: false,
       strokeWidth: 1,
-      strokeColor: 'black',
+      strokeColor: "black",
       setStrokeWidth: (width: number) => {
         set({ strokeWidth: width });
       },
@@ -111,12 +107,14 @@ const useStore = create<State>()(
       },
       // Fetch Room IDs from FireStore
       fetchRoomIDs: async () => {
-        const roomIDsCollection = collection(db, 'RoomIDs');
+        const roomIDsCollection = collection(db, "RoomIDs");
         const RoomIDsSnapShot = await getDocs(roomIDsCollection);
-        const RoomIDsList = RoomIDsSnapShot.docs.map((doc) => doc.data().roomID);
+        const RoomIDsList = RoomIDsSnapShot.docs.map(
+          (doc) => doc.data().roomID
+        );
         set({ roomIDs: RoomIDsList });
       },
-       // Dissolve Movement Handlers
+      // Dissolve Movement Handlers
       DissolveMovementPointerDown: () => {
         set({ commentDragging: true });
       },
@@ -148,7 +146,7 @@ const useStore = create<State>()(
         return Math.floor(Math.random() * max);
       },
 
-      //threads CRUD operations 
+      //threads CRUD operations
       addThreads: (threadId, text, x, y) => {
         const { threads } = get();
         const thread = {
@@ -184,14 +182,14 @@ const useStore = create<State>()(
         set({ selection: true });
       },
 
-      // RoomIDs 
+      // RoomIDs
       setRoomID: (roomID) => {
         set({ roomID });
       },
       addRoomID: async (roomID) => {
         const { roomIDs } = get();
         const newRoomIDs = [...roomIDs, roomID];
-        await addDoc(collection(db, 'RoomIDs'), { roomID });
+        await addDoc(collection(db, "RoomIDs"), { roomID });
         set({ roomIDs: newRoomIDs });
       },
       checkRoomID: (roomID: string | null) => {
@@ -200,25 +198,22 @@ const useStore = create<State>()(
         return roomIDs.includes(roomID);
       },
 
-      
-      
-
-      //set the type for the shapes 
+      //set the type for the shapes
       setTypeRect: () => {
         set({
-          type: 'rectangle',
+          type: "rectangle",
           selection: false,
         });
       },
       setTypeLine: () => {
         set({
-          type: 'line',
+          type: "line",
           selection: false,
         });
       },
       setPen: () => {
         set({
-          type: 'pen',
+          type: "pen",
           selection: false,
         });
       },
@@ -227,28 +222,28 @@ const useStore = create<State>()(
 
       startDrawing: (e) => {
         set({ drawing: true });
-        const { type, shapes,strokeColor,strokeWidth } = get();
+        const { type, shapes, strokeColor, strokeWidth } = get();
         const shapeId = Date.now().toString();
         let shape: Shape = {
-            shapeId,
-            x: 0,
-            y: 0,
-            type: 'rectangle', 
-            strokeColor:strokeColor,
-           strokeWidth:strokeWidth
-          };
-        if (type === 'rectangle') {
+          shapeId,
+          x: 0,
+          y: 0,
+          type: "rectangle",
+          strokeColor: strokeColor,
+          strokeWidth: strokeWidth,
+        };
+        if (type === "rectangle") {
           shape = {
             shapeId,
             x: e.clientX,
             y: e.clientY,
             width: 0,
             height: 0,
-            strokeColor:strokeColor ,
-            strokeWidth:strokeWidth,
-            type: 'rectangle',
+            strokeColor: strokeColor,
+            strokeWidth: strokeWidth,
+            type: "rectangle",
           };
-        } else if (type === 'line') {
+        } else if (type === "line") {
           shape = {
             shapeId,
             x: e.clientX,
@@ -256,17 +251,17 @@ const useStore = create<State>()(
             x2: e.clientX,
             y2: e.clientY,
             strokeColor: strokeColor,
-            strokeWidth:strokeWidth,
-            type: 'line',
+            strokeWidth: strokeWidth,
+            type: "line",
           };
-        } else if (type === 'pen') {
+        } else if (type === "pen") {
           shape = {
             shapeId,
             x: e.nativeEvent.offsetX,
             y: e.nativeEvent.offsetY,
             strokeColor: strokeColor,
-            strokeWidth:strokeWidth,
-            type: 'pen',
+            strokeWidth: strokeWidth,
+            type: "pen",
             path: [{ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY }],
           };
         }
@@ -279,12 +274,12 @@ const useStore = create<State>()(
 
       continueDrawing: (e) => {
         const { shapes, shapeSelected, drawing } = get();
-        if (!drawing || shapeSelected === null) return; 
+        if (!drawing || shapeSelected === null) return;
         const shape = shapes[shapeSelected];
         if (!drawing) {
           return;
         }
-        if (shape.type === 'rectangle') {
+        if (shape.type === "rectangle") {
           set({
             shapes: {
               ...shapes,
@@ -295,7 +290,7 @@ const useStore = create<State>()(
               },
             },
           });
-        } else if (shape.type === 'line') {
+        } else if (shape.type === "line") {
           set({
             shapes: {
               ...shapes,
@@ -306,7 +301,7 @@ const useStore = create<State>()(
               },
             },
           });
-        } else if (shape.type === 'pen') {
+        } else if (shape.type === "pen") {
           const newPath = [...shape.path!, { x: e.clientX, y: e.clientY }];
           set({
             shapes: {
@@ -325,38 +320,39 @@ const useStore = create<State>()(
         get().liveblocks.room?.history.resume();
       },
 
-      // shape selection functions 
+      // shape selection functions
       selectShape: (e) => {
         const { shapes } = get();
         const shapeSelected = Object.keys(shapes).find((shapeId) => {
           const shape = shapes[shapeId];
-          if (shape.type === 'rectangle') {
+          if (shape.type === "rectangle") {
             return (
               e.clientX >= shape.x &&
               e.clientX <= shape.x + shape.width! &&
               e.clientY >= shape.y &&
               e.clientY <= shape.y + shape.height!
             );
-          } else if (shape.type === 'line') {
+          } else if (shape.type === "line") {
             return (
               Math.abs(
                 (e.clientX - shape.x) * (shape.y2! - shape.y) -
-                (e.clientY - shape.y) * (shape.x2! - shape.x)
+                  (e.clientY - shape.y) * (shape.x2! - shape.x)
               ) /
-              Math.sqrt(
-                (shape.x2! - shape.x) ** 2 + (shape.y2! - shape.y) ** 2
-              ) <= 5
+                Math.sqrt(
+                  (shape.x2! - shape.x) ** 2 + (shape.y2! - shape.y) ** 2
+                ) <=
+              5
             );
           }
         });
         set({ shapeSelected, isDragging: Boolean(shapeSelected) });
       },
 
-      // function for Live cursors 
+      // function for Live cursors
       cursorMovement: (e) => {
         const { drawing, type } = get();
         set({ cursor: { x: e.clientX, y: e.clientY } });
-        if (drawing && type === 'pen') {
+        if (drawing && type === "pen") {
           get().continueDrawing(e);
         }
       },
@@ -370,7 +366,6 @@ const useStore = create<State>()(
           shapes: {},
         });
       },
-
 
       selectParticularShape: (shapeId) => {
         set({
@@ -412,16 +407,21 @@ const useStore = create<State>()(
       },
     }),
 
-    //liveblocks presence mapping and storage mapping 
+    //liveblocks presence mapping and storage mapping
     {
       client,
       presenceMapping: {
-        shapeSelected:true,cursor:true,commentDragging:true
+        shapeSelected: true,
+        cursor: true,
+        commentDragging: true,
       },
       storageMapping: {
-        shapes:true,roomIDs:true,path:true,threads:true,commentValues:true
+        shapes: true,
+        roomIDs: true,
+        path: true,
+        threads: true,
+        commentValues: true,
       },
-    
     }
   )
 );
