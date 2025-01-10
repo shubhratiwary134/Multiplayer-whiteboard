@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import useStore from '../storage/store';
+import useStore from "../storage/store";
 import { useEffect } from "react";
-import Board from './Board';
-import LoadingPage from "./LoadingPage";
+import Board from "./Board";
+import LoadingPage from "./LoadingForRoom";
 
 // Define the expected shape of the URL parameters
 interface RoomParams {
@@ -12,7 +12,7 @@ interface RoomParams {
 export default function Room() {
   // Use the defined type for the URL parameters
   const { roomID } = useParams<RoomParams>();
-  
+
   // Define types for the store's state and methods
   const enterRoom = useStore((state) => state.liveblocks.enterRoom);
   const leaveRoom = useStore((state) => state.liveblocks.leaveRoom);

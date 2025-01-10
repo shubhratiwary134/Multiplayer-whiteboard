@@ -1,6 +1,6 @@
-import { useAuth } from "@clerk/clerk-react";
+import { RedirectToSignUp, useAuth } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import LoadingScreen from "./LoadingScreen";
 
 const ProtectedRoutes = ({ children }) => {
   const { isSignedIn, isLoaded } = useAuth();
@@ -11,10 +11,14 @@ const ProtectedRoutes = ({ children }) => {
     }
   }, [isLoaded]);
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <LoadingScreen />
+      </div>
+    );
   }
   if (!isSignedIn) {
-    return <Navigate to="/Sign-In" />;
+    return <RedirectToSignUp />;
   }
   return children;
 };
