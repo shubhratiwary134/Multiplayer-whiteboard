@@ -1,8 +1,9 @@
 import { RedirectToSignUp, useAuth } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import LoadingScreen from "./LoadingScreen";
+import { ReactNode } from "react";
 
-const ProtectedRoutes = ({ children }) => {
+const ProtectedRoutes = ({ children }: { children: ReactNode }) => {
   const { isSignedIn, isLoaded } = useAuth();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
