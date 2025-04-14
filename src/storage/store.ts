@@ -1,8 +1,6 @@
 import { create } from "zustand";
 import { createClient } from "@liveblocks/client";
 import { liveblocks } from "@liveblocks/zustand";
-import { db } from "../Firebase";
-import { collection, addDoc, getDocs } from "firebase/firestore";
 
 export const client = createClient({
   publicApiKey: import.meta.env.VITE_API_KEY,
@@ -39,8 +37,6 @@ interface CommentValues {
 interface State {
   shapes: { [key: string]: Shape };
   threads: { [key: string]: Thread };
-  roomID: string | null;
-  roomIDs: string[];
   shapeSelected: string | null;
   isDragging: boolean;
   drawing: boolean;
@@ -53,7 +49,6 @@ interface State {
   strokeColor: string;
   setStrokeWidth: (width: number) => void;
   setStrokeColor: (color: string) => void;
-  fetchRoomIDs: () => Promise<void>;
   DissolveMovementPointerDown: () => void;
   DissolveMovementPointerMove: (threadId: string, e: PointerEvent) => void;
   DissolveMovementPointerUp: () => void;
@@ -63,9 +58,6 @@ interface State {
   updateThread: (threadId: string, text: string) => void;
   deleteThreads: (threadId: string) => void;
   setSelection: () => void;
-  setRoomID: (roomID: string) => void;
-  addRoomID: (roomID: string) => Promise<void>;
-  checkRoomID: (roomID: string | null) => boolean;
   startDrawing: (e: React.MouseEvent) => void;
   setTypeRect: () => void;
   setTypeLine: () => void;
@@ -106,15 +98,6 @@ const useStore = create<State>()(
       },
       setStrokeColor: (color: string) => {
         set({ strokeColor: color });
-      },
-      // Fetch Room IDs from FireStore
-      fetchRoomIDs: async () => {
-        const roomIDsCollection = collection(db, "RoomIDs");
-        const RoomIDsSnapShot = await getDocs(roomIDsCollection);
-        const RoomIDsList = RoomIDsSnapShot.docs.map(
-          (doc) => doc.data().roomID
-        );
-        set({ roomIDs: RoomIDsList });
       },
       // Dissolve Movement Handlers
       DissolveMovementPointerDown: () => {
@@ -183,23 +166,6 @@ const useStore = create<State>()(
       setSelection: () => {
         set({ selection: true });
       },
-
-      // RoomIDs
-      setRoomID: (roomID) => {
-        set({ roomID });
-      },
-      addRoomID: async (roomID) => {
-        const { roomIDs } = get();
-        const newRoomIDs = [...roomIDs, roomID];
-        await addDoc(collection(db, "RoomIDs"), { roomID });
-        set({ roomIDs: newRoomIDs });
-      },
-      checkRoomID: (roomID: string | null) => {
-        if (!roomID) return false;
-        const { roomIDs } = get();
-        return roomIDs.includes(roomID);
-      },
-
       //set the type for the shapes
       setTypeRect: () => {
         set({
@@ -419,7 +385,6 @@ const useStore = create<State>()(
       },
       storageMapping: {
         shapes: true,
-        roomIDs: true,
         path: true,
         threads: true,
         commentValues: true,
