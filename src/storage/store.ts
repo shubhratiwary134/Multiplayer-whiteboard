@@ -8,6 +8,8 @@ const client = createClient({
   publicApiKey: import.meta.env.VITE_API_KEY,
 });
 
+// initial commit starting the refactoring of the zustand store by breaking the store into smaller chunks of code making it more readable and structured
+
 //type definitions
 interface Shape {
   shapeId: string;
