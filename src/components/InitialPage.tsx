@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useStore from "../storage/store";
 import logo from "../images/backgroundWeb.gif";
 import Navbar from "./Navbar";
-import { SignOutButton } from "@clerk/clerk-react";
+import useRoomStore from "../storage/roomStore";
 
 interface State {
   liveblocks: {
@@ -22,10 +22,10 @@ export default function InitialPage() {
   const isLoading = useStore(
     (state: State) => state.liveblocks.isStorageLoading
   );
-  const setRoomID = useStore((state: State) => state.setRoomID);
-  const addRoomID = useStore((state: State) => state.addRoomID);
-  const checkRoomID = useStore((state: State) => state.checkRoomID);
-  const fetchRoomIDs = useStore((state: State) => state.fetchRoomIDs);
+  const setRoomID = useRoomStore((state: State) => state.setRoomID);
+  const addRoomID = useRoomStore((state: State) => state.addRoomID);
+  const checkRoomID = useRoomStore((state: State) => state.checkRoomID);
+  const fetchRoomIDs = useRoomStore((state: State) => state.fetchRoomIDs);
 
   const navigate = useNavigate();
 
@@ -45,7 +45,6 @@ export default function InitialPage() {
   function joinRoom() {
     if (tempRoomId && checkRoomID(tempRoomId)) {
       setRoomID(tempRoomId);
-      console.log("entering if");
       navigate(`/room/${tempRoomId}`);
     } else {
       window.alert("Wrong input");

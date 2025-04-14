@@ -4,7 +4,7 @@ import { liveblocks } from "@liveblocks/zustand";
 import { db } from "../Firebase";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 
-const client = createClient({
+export const client = createClient({
   publicApiKey: import.meta.env.VITE_API_KEY,
 });
 
