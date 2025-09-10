@@ -52,8 +52,6 @@ Usage
 
 
 
-![Screenshot](./src/images/UI2.png)
-
 
 
 Technologies Used
