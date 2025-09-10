@@ -58,12 +58,11 @@ Technologies Used
 
     Frontend: React, Tailwind CSS, Zustand
     Real-time Collaboration: Liveblocks
-    Authentication: Keycloak
-    Containerization: Docker
+    Databases: Firebase(Firestore).
 
 Prerequisites
 
-    Docker
+    React
     Node.js
     Keycloak server setup
 
