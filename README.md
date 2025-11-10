@@ -1,73 +1,116 @@
-Multiplayer Whiteboard
-Overview
 
-This project is a multiplayer whiteboard application built using Liveblocks for real-time collaboration and Keycloak for authentication. Users can draw shapes, join existing rooms, create new rooms, and import the canvas as an image or PDF. The frontend is built with React, styled with Tailwind CSS, and uses Zustand for state management. The entire setup is containerized using Docker.
+# Real-Time Multiplayer Whiteboard
+---
+
+This is a real-time, collaborative whiteboard application built with **React**, **Vite**, **Liveblocks**, and **Firebase**. This platform allows multiple users to join a shared "room" to draw, add text, and leave comments simultaneously. It features live cursor tracking, a full commenting system, and Google-based authentication.
+
+## 🖼️ Screenshots
+
+![Screenshot](./src/images/UI.png) ![Screenshot](./src/images/UI4.png)
+
+## ✨ Core Features
+
+  * **Real-Time Collaboration:** Powered by **Liveblocks**, all actions (drawing, text, comments) are synced across clients instantly.
+  * **Live Cursors:** See other users' cursors move on the screen in real-time.
+  * **Drawing Tools:**
+      * **Pencil:** For free-hand drawing.
+      * **Rectangle:** To create defined shapes.
+      * **Text Tool:** To add text directly onto the canvas.
+  * **Live Commenting:** A complete, high-level commenting system (`@liveblocks/react-comments`) for users to have discussions on the board.
+  * **Authentication:** Secure user sign-in and sign-out using **Firebase Authentication** (Google Provider).
+  * **Room-Based Sessions:** Users can create a new whiteboard session, which generates a unique URL to share with collaborators.
+  * **Sketchy UI Style:** Uses **Rough.js** to give all drawn elements a hand-drawn, sketchy appearance.
+  * **Protected Routes:** Users must be logged in to view and edit a whiteboard.
+
+## 🛠️ Tech Stack
+
+  * **Frontend:** React 18 (with Vite), TypeScript
+  * **Real-Time Collaboration:** Liveblocks
+      * `@liveblocks/client`
+      * `@liveblocks/react`
+      * `@liveblocks/react-comments`
+  * **Authentication:** Firebase (Google Sign-In)
+  * **Styling:** Tailwind CSS
+  * **Drawing Library:** Rough.js
+  * **Routing:** React Router DOM
+  * **State:** Liveblocks Storage (`LiveObject`, `LiveMap`, `LiveList`)
+
+## How It Works: Data Model
+
+The real-time collaboration is managed by Liveblocks. The shared state is defined in `src/storage/store.ts`:
+
+  * **`shapes` (`LiveMap<string, Shape>`):** A map storing all drawn shapes (pencil, rectangle, text) indexed by a unique `nanoid`.
+  * **`users` (`LiveObject<User>`):** An object storing information about the current user (e.g., name, color).
+  * **`comments` (`LiveList<Comment>`):** A list to store all comment threads.
+
+The application uses the `useMutation` hook from Liveblocks to update the state and broadcasts changes to all other connected clients.
+
+## 🚀 Getting Started
+
+### 1\. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/multiplayer-whiteboard.git
+cd multiplayer-whiteboard
+```
+
+### 2\. Install Dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3\. Set Up Environment Variables
+
+This project requires credentials from both **Liveblocks** and **Firebase**.
+
+Create a file named `.env.local` in the root of the project and add the following:
+
+```env
+# Get your public key from https://liveblocks.io/dashboard
+VITE_LIVEBLOCKS_PUBLIC_KEY=pk_your_public_key
+
+# Get your Firebase config from the Firebase console (Project settings > Your apps > Web app)
+VITE_API_KEY=AIza...
+VITE_AUTH_DOMAIN=your-project.firebaseapp.com
+VITE_PROJECT_ID=your-project-id
+VITE_STORAGE_BUCKET=your-project.appspot.com
+VITE_MESSAGING_SENDER_ID=123456789
+VITE_APP_ID=1:12345:web:abcdef...
+```
+
+**How to get the keys:**
+
+  * **Liveblocks:**
+    1.  Go to the [Liveblocks Dashboard](https://liveblocks.io/dashboard).
+    2.  Create a new project.
+    3.  Find the **Public key** in the "API Keys" section and paste it into your `.env.local` file.
+  * **Firebase:**
+    1.  Go to the [Firebase Console](https://console.firebase.google.com/).
+    2.  Create a new project.
+    3.  Go to **Authentication** \> **Sign-in method** and enable the **Google** provider.
+    4.  Go back to **Project Overview** \> **Project settings**.
+    5.  Under the "General" tab, scroll down to "Your apps".
+    6.  Create a new **Web app** (or use an existing one).
+    7.  Copy the `firebaseConfig` object values into your `.env.local` file.
+
+### 4\. Run the Development Server
+
+Once your dependencies are installed and your environment variables are set, you can start the app.
+
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`.
 
 
-
-![Screenshot](./src/images/UI.png)
-
-
-
-
-Usage
-
- Create a Room:
-        Open the application and click on "Create Room."
-        Share the room ID with others to join.
-
- Join a Room:
-        Open the application and enter the room ID in the "Join Room" section.
-        Click "Join Room" to start drawing with others.
-
- Drawing:
-        Select the desired drawing tool (Brush, Rectangle, Line) from the toolbar.
-        Customize the stroke color and width using the provided options.
-        Draw on the canvas. Your changes will be visible to others in real-time.
-
- Cursor Visibility:
-        Move your cursor around the canvas to see the cursors of other users.
 
 
 
         
-![Screenshot](./src/images/UI4.png)
 
-
-        
-
- Draggable Comments:
-        Add a comment by selecting the comment tool and clicking on the canvas.
-        Drag the comment to reposition it.
-
-  Undo/Redo:
-        Use the undo button to revert the last action.
-        Use the redo button to reapply the last undone action.
-
- Clear Canvas:
-        Click the clear button to remove all drawings from the canvas.
-
- Export Canvas:
-         Export the canvas in format of image or pdf ,using the export option in the Top . 
-
-
-
-
-
-Technologies Used
-
-    Frontend: React, Tailwind CSS, Zustand
-    Real-time Collaboration: Liveblocks
-    Databases: Firebase(Firestore).
-
-Prerequisites
-
-    React
-    Node.js
-    Keycloak server setup
-
-Contact
-
-For any inquiries or issues, please contact [shubhratiwary5@gmail.com].
 
     
