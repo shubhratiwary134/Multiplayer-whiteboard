@@ -4,11 +4,11 @@
 
 This is a real-time, collaborative whiteboard application built with **React**, **Vite**, **Liveblocks**, and **Firebase**. This platform allows multiple users to join a shared "room" to draw, add text, and leave comments simultaneously. It features live cursor tracking, a full commenting system, and Google-based authentication.
 
-## 🖼️ Screenshots
+##  Screenshots
 
 ![Screenshot](./src/images/UI.png) ![Screenshot](./src/images/UI4.png)
 
-## ✨ Core Features
+##  Core Features
 
   * **Real-Time Collaboration:** Powered by **Liveblocks**, all actions (drawing, text, comments) are synced across clients instantly.
   * **Live Cursors:** See other users' cursors move on the screen in real-time.
@@ -22,7 +22,7 @@ This is a real-time, collaborative whiteboard application built with **React**, 
   * **Sketchy UI Style:** Uses **Rough.js** to give all drawn elements a hand-drawn, sketchy appearance.
   * **Protected Routes:** Users must be logged in to view and edit a whiteboard.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
   * **Frontend:** React 18 (with Vite), TypeScript
   * **Real-Time Collaboration:** Liveblocks
@@ -45,7 +45,7 @@ The real-time collaboration is managed by Liveblocks. The shared state is define
 
 The application uses the `useMutation` hook from Liveblocks to update the state and broadcasts changes to all other connected clients.
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1\. Clone the Repository
 
@@ -105,6 +105,32 @@ npm run dev
 ```
 
 The application will be available at `http://localhost:5173`.
+
+---
+
+## Contributing 
+
+Contributions are welcome and encouraged! Simply fork this repository or create a new branch and open a pull request against main.
+
+When opening a PR, please provide a brief summary explaining the changes as well as some code examples to test the functionality. Also, please be prepared to edit your pull request based on comments and feedback.
+
+---
+
+##  License(MIT)
+
+Copyright (c) 2025 Shubhra Tiwary
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+##  Author
+
+Built by **Shubhra Tiwary**
 
 
 
