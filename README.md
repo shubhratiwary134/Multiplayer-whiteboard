@@ -6,13 +6,11 @@
 This is a real-time, collaborative whiteboard application built with **React**, **Vite**, **Liveblocks**, and **Firebase**. This platform allows multiple users to join a shared "room" to draw, add text, and leave comments simultaneously. It features live cursor tracking, a full commenting system, and Google-based authentication.
 
 ##  Screenshots
-
 ---
 
 ![Screenshot](./src/images/UI.png) ![Screenshot](./src/images/UI4.png)
 
 ##  Core Features
-
 ---
 
   * **Real-Time Collaboration:** Powered by **Liveblocks**, all actions (drawing, text, comments) are synced across clients instantly.
@@ -28,7 +26,6 @@ This is a real-time, collaborative whiteboard application built with **React**, 
   * **Protected Routes:** Users must be logged in to view and edit a whiteboard.
 
 ## Tech Stack
-
 ---
 
   * **Frontend:** React 18 (with Vite), TypeScript
@@ -43,7 +40,6 @@ This is a real-time, collaborative whiteboard application built with **React**, 
   * **State:** Liveblocks Storage (`LiveObject`, `LiveMap`, `LiveList`)
 
 ## How It Works: Data Model
-
 ---
 
 The real-time collaboration is managed by Liveblocks. The shared state is defined in `src/storage/store.ts`:
@@ -55,7 +51,6 @@ The real-time collaboration is managed by Liveblocks. The shared state is define
 The application uses the `useMutation` hook from Liveblocks to update the state and broadcasts changes to all other connected clients.
 
 ##  Getting Started
-
 ---
 
 ### 1\. Clone the Repository
