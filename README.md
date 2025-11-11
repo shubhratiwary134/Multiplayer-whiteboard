@@ -3,6 +3,9 @@
 
 ---
 
+![React](https://img.shields.io/badge/React-Frontend-blue?style=for-the-badge&logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-Code-blue?style=for-the-badge&logo=typescript) ![Vite](https://img.shields.io/badge/Vite-Build-purple?style=for-the-badge&logo=vite) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-Styling-cyan?style=for-the-badge&logo=tailwindcss) ![Liveblocks](https://img.shields.io/badge/Liveblocks-Real--Time-9B4BFF?style=for-the-badge) ![Clerk](https://img.shields.io/badge/Clerk-Auth-blue?style=for-the-badge&logo=clerk) ![Firebase](https://img.shields.io/badge/Firebase-Database-orange?style=for-the-badge&logo=firebase) ![Zustand](https://img.shields.io/badge/Zustand-State-black?style=for-the-badge) ![Rough.js](https://img.shields.io/badge/Rough.js-Drawing-lightgrey?style=for-the-badge) ![MIT License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
+---
 This is a real-time, collaborative whiteboard application built with **React**, **Vite**, **Liveblocks**, and **Firebase**. This platform allows multiple users to join a shared "room" to draw, add text, and leave comments simultaneously. It features live cursor tracking, a full commenting system, and Google-based authentication.
 
 ##  Screenshots
